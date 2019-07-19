@@ -5,6 +5,6 @@ const ProjectRouter = require('./projects/projects_router');
 const server = express();
 
 server.use(express.json());
-server.use('/api/schemes', ProjectRouter);
+server.use('/api/projects', ProjectRouter);
 
 module.exports = server;
