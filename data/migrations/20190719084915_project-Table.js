@@ -7,19 +7,19 @@ exports.up = function(knex) {
         .unique()
         .notNullable();
       tbl.string("project_description", 255).notNullable();
-      tbl.boolean("project_status").notNullable();
+      tbl.boolean("project_status").defaultTo(0);
     })
     .createTable("actions", tbl => {
       tbl.increments();
-      tbl.string("action_description", 255).notNullable();
-      tbl.string("actions_notes", 255).notNullable();
-      tbl.boolean("action_status").notNullable();
+      tbl.string("action_description", 255).unique().notNullable();
+      tbl.string("action_note", 255).notNullable();
+      tbl.boolean("action_status").defaultTo(0);
       tbl
         .integer("project_id")
         .unsigned()
         .notNullable()
         .references("id")
-        .inTable("schemes")
+        .inTable("projects")
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
     });
